@@ -495,6 +495,9 @@ a.menu-item:hover { color: #86eeff; }
   }
   .menu-panel { left: 0; min-width: 0; }
   .menu-item { text-align: center; }
+  .footer-section {
+    padding-bottom: 100px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .app-links, .compact-nav, .compact-nav.is-visible, .menu-panel, .menu-panel.is-open, .menu-button span, .app-link, .app-link img, .label, .menu-item, .gallery-modal, .gallery-image, .gallery-close, .gallery-arrow, .things-we-love-img { animation: none; transition: none; translate: 0 0; }
@@ -1338,7 +1341,8 @@ a.menu-item:hover { color: #86eeff; }
   background: #0d0d0d;
   color: #fff;
   padding-top: clamp(60px, 8.75vh, 90px);
-  padding-bottom: clamp(140px, 25vh, 260px);
+  padding-bottom: clamp(40px, 5vh, 60px);
+  padding-bottom: clamp(40px, 5svh, 60px);
   box-sizing: border-box;
   overflow: hidden;
   scroll-margin-top: clamp(60px, 8vw, 100px);
