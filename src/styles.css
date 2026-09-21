@@ -508,7 +508,7 @@ a.label { color: inherit; text-decoration: none; }
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .app-links, .compact-nav, .compact-nav.is-visible, .menu-panel, .menu-panel.is-open, .menu-button span, .app-link, .app-link img, .label, .menu-item, .gallery-modal, .gallery-image, .gallery-close, .gallery-arrow, .things-we-love-img, .biography-image { animation: none; transition: none; translate: 0 0; }
+  .app-links, .compact-nav, .compact-nav.is-visible, .menu-panel, .menu-panel.is-open, .menu-button span, .app-link, .app-link img, .label, .menu-item, .gallery-modal, .gallery-image, .gallery-close, .gallery-arrow, .things-we-love-img, .biography-image, .contact-status-card { animation: none; transition: none; translate: 0 0; }
 }
 
 
@@ -1293,6 +1293,117 @@ a.label { color: inherit; text-decoration: none; }
 .contact-submit-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+/* Contact Status Card */
+.contact-status-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin-top: 6px;
+  padding: 16px 20px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  animation: settle 200ms ease;
+  text-align: left;
+}
+
+.contact-status-card.is-success {
+  background: rgba(92, 219, 149, 0.08);
+  border: 1px solid rgba(92, 219, 149, 0.35);
+}
+
+.contact-status-card.is-error {
+  background: rgba(255, 107, 107, 0.08);
+  border: 1px solid rgba(255, 107, 107, 0.35);
+}
+
+.contact-status-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.contact-status-card.is-success .contact-status-icon {
+  color: #5cdb95;
+  flex-shrink: 0;
+}
+
+.contact-status-card.is-error .contact-status-icon {
+  color: #ff6b6b;
+  flex-shrink: 0;
+}
+
+.contact-status-title {
+  font-family: 'Open Sauce', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.contact-status-card.is-success .contact-status-title {
+  color: #5cdb95;
+}
+
+.contact-status-card.is-error .contact-status-title {
+  color: #ff6b6b;
+}
+
+.contact-status-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.contact-status-text {
+  margin: 0;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.5;
+  color: #d6d6d6;
+}
+
+.contact-status-code {
+  display: inline-block;
+  padding: 1px 7px;
+  margin: 0 2px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13.5px;
+  color: #86eeff;
+  vertical-align: baseline;
+}
+
+.contact-status-link {
+  color: #86eeff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(134, 238, 255, 0.4);
+  transition: color 150ms ease, border-color 150ms ease;
+  word-break: break-word;
+}
+
+.contact-status-link:hover,
+.contact-status-link:focus-visible {
+  color: #fff;
+  border-color: #fff;
+}
+
+.contact-status-link-highlight {
+  color: #fff;
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+}
+
+.contact-status-fallback {
+  margin-top: 2px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: #a0a0a0;
 }
 
 .contact-status-msg {

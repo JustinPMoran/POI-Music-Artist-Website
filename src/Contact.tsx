@@ -10,17 +10,8 @@ export function Contact() {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    const fallbackMailto = () => {
-      const subject = encodeURIComponent(`POI Project Inquiry: ${data.subject || 'Project Proposal'}`);
-      const body = encodeURIComponent(
-        `Name: ${data.name || ''}\nEmail: ${data.email || ''}\n\nMessage:\n${data.message || ''}`
-      );
-      window.location.href = `mailto:pvmclasen@gmail.com?subject=${subject}&body=${body}`;
-      setStatus('success');
-    };
-
     try {
-      const res = await fetch('https://formsubmit.co/ajax/pvmclasen@gmail.com', {
+      const res = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,8 +22,6 @@ export function Contact() {
           email: data.email,
           subject: data.subject,
           message: data.message,
-          _subject: `POI Inquiry from ${data.name}: ${data.subject || 'New Message'}`,
-          _template: 'box',
         }),
       });
 
@@ -40,10 +29,15 @@ export function Contact() {
         setStatus('success');
         form.reset();
       } else {
-        fallbackMailto();
+        const errorData = await res.json().catch(() => null);
+        if (errorData?.error) {
+          console.error('Contact API Error:', errorData.error);
+        }
+        setStatus('error');
       }
-    } catch {
-      fallbackMailto();
+    } catch (err) {
+      console.error('Contact Form Network Error:', err);
+      setStatus('error');
     }
   };
 
@@ -129,15 +123,66 @@ export function Contact() {
           </button>
 
           {status === 'success' && (
-            <p className="contact-status-msg is-success" role="status">
-              ✓ Message sent! We will get back to you shortly.
-            </p>
+            <div className="contact-status-card is-success" role="status">
+              <div className="contact-status-header">
+                <svg
+                  className="contact-status-icon"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+                <span className="contact-status-title">MESSAGE SENT</span>
+              </div>
+              <div className="contact-status-body">
+                <p className="contact-status-text">
+                  Thank you for reaching out! We will get back to you shortly.
+                </p>
+              </div>
+            </div>
           )}
 
           {status === 'error' && (
-            <p className="contact-status-msg is-error" role="alert">
-              Unable to send message. Please try again.
-            </p>
+            <div className="contact-status-card is-error" role="alert">
+              <div className="contact-status-header">
+                <svg
+                  className="contact-status-icon"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <span className="contact-status-title">UNABLE TO SEND MESSAGE</span>
+              </div>
+              <div className="contact-status-body">
+                <p className="contact-status-text">
+                  Unable to send your message right now. Please try again later or email{' '}
+                  <a
+                    href="mailto:pvmclasen@gmail.com"
+                    className="contact-status-link contact-status-link-highlight"
+                  >
+                    pvmclasen@gmail.com
+                  </a>{' '}
+                  directly.
+                </p>
+              </div>
+            </div>
           )}
         </form>
       </div>
