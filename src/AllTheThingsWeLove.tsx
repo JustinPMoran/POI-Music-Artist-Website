@@ -60,7 +60,7 @@ export function AllTheThingsWeLove() {
         <h2 className="things-we-love-title">ALL THE THINGS WE LOVE</h2>
         <a
           className="things-we-love-btn"
-          href="https://poisounds.com/#:~:text=THINGS%20WE%20LOVE-,LISTEN%20HERE,-Meet%20Paul%20Clasen"
+          href="https://vyd.co/AllTheThingsWeLove"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -70,4 +70,3 @@ export function AllTheThingsWeLove() {
     </section>
   );
 }
-

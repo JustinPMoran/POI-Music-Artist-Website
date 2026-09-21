@@ -31,7 +31,7 @@ main { position: relative; background: #000019; }
 a.logo { display: block; cursor: pointer; line-height: 0; transition: opacity 200ms ease; }
 .is-ready a.logo:hover, .is-ready a.logo:focus-visible { opacity: .82; }
 a.logo img { width: 100%; height: auto; display: block; }
-.label { font-size: 1.55729167vw; line-height: 1.2; font-weight: 700; letter-spacing: .018em; white-space: nowrap; opacity: 0; cursor: pointer; transition: opacity 200ms ease; color: inherit; text-decoration: none; }
+.label { font-size: 1.55729167vw; line-height: 1.2; font-weight: 400; letter-spacing: .018em; white-space: nowrap; opacity: 0; cursor: pointer; transition: opacity 200ms ease; color: inherit; text-decoration: none; }
 a.label { color: inherit; text-decoration: none; }
 /* Label text is 20% smaller, centred in a hidden full-size copy so positions don't move. */
 .label { display: inline-grid; place-items: center; }
@@ -42,7 +42,7 @@ a.label { color: inherit; text-decoration: none; }
 .nav-side { position: absolute; top: 5.3125vw; display: flex; align-items: baseline; gap: 5.2vw; }
 .nav-left { right: calc(56.18229167% + 4.5vw); }
 .nav-right { left: calc(55.19270833% + 4.5vw); }
-.contact { font-family: 'Open Sauce', sans-serif; font-weight: 700; font-size: 1.43vw; letter-spacing: -.035em; }
+.contact { font-family: inherit; font-weight: 400; font-size: 1.43vw; letter-spacing: -.035em; }
 .is-ready .stage { animation: fade-in 1200ms ease-out both; }
 .is-ready .performer { animation: fade-from-clear 1200ms ease-out both; }
 .is-ready .logo { animation: settle 900ms cubic-bezier(.22, 1, .36, 1) 160ms both; }
@@ -325,7 +325,7 @@ a.label { color: inherit; text-decoration: none; }
 }
 .menu-button span { display: block; width: var(--line-width); height: 2px; border-radius: 1px; background: #fff; transition: transform 260ms ease, opacity 200ms ease; }
 .menu-button.is-open span:nth-child(1) { transform: translateY(calc(var(--line-gap) + 2px)) rotate(45deg); }
-.menu-button.is-open span:nth-child(2) { opacity: 0; }
+.menu-button.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .menu-button.is-open span:nth-child(3) { transform: translateY(calc(-1 * (var(--line-gap) + 2px))) rotate(-45deg); }
 .menu-panel {
   position: absolute;
@@ -348,7 +348,7 @@ a.label { color: inherit; text-decoration: none; }
 .menu-item {
   display: block;
   padding: 13px var(--bar-gutter);
-  color: #fff;
+  color: rgba(255, 255, 255, 0.6);
   font-size: clamp(16px, 1.3vw, 22px);
   font-weight: 700;
   letter-spacing: .018em;
@@ -356,14 +356,21 @@ a.label { color: inherit; text-decoration: none; }
   text-align: right;
   text-decoration: none;
   text-shadow: 0 1px 8px #0006;
-  opacity: .6;
   cursor: pointer;
-  transition: opacity 200ms ease, color 200ms ease;
+  transition: color 300ms ease, text-shadow 300ms ease;
 }
 .menu-item-contact { font-family: 'Open Sauce', sans-serif; letter-spacing: -.035em; }
-.menu-item:hover,
-.menu-item:focus-visible { opacity: 1; }
-a.menu-item:hover { color: #86eeff; }
+/* Smooth color transition to the cyan accent on hover for devices that support hover */
+@media (hover: hover) {
+  .menu-item:hover {
+    color: #86eeff;
+    text-shadow: 0 1px 12px rgba(134, 238, 255, 0.35), 0 1px 8px #0006;
+  }
+}
+.menu-item:focus-visible {
+  color: #86eeff;
+  text-shadow: 0 1px 12px rgba(134, 238, 255, 0.35), 0 1px 8px #0006;
+}
 .app-link:focus-visible, .menu-button:focus-visible, .menu-item:focus-visible { outline: 2px solid #86eeff; outline-offset: 3px; }
 @media (max-width: 900px) {
   .app-link-mail { display: none; }
@@ -474,6 +481,7 @@ a.menu-item:hover { color: #86eeff; }
   }
   .menu-button.is-open span:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
   }
   .menu-button.is-open span:nth-child(3) {
     transform: translateY(calc(-1 * (var(--line-gap) + 3.3px))) rotate(-45deg);
@@ -500,7 +508,7 @@ a.menu-item:hover { color: #86eeff; }
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .app-links, .compact-nav, .compact-nav.is-visible, .menu-panel, .menu-panel.is-open, .menu-button span, .app-link, .app-link img, .label, .menu-item, .gallery-modal, .gallery-image, .gallery-close, .gallery-arrow, .things-we-love-img { animation: none; transition: none; translate: 0 0; }
+  .app-links, .compact-nav, .compact-nav.is-visible, .menu-panel, .menu-panel.is-open, .menu-button span, .app-link, .app-link img, .label, .menu-item, .gallery-modal, .gallery-image, .gallery-close, .gallery-arrow, .things-we-love-img, .biography-image { animation: none; transition: none; translate: 0 0; }
 }
 
 
@@ -880,21 +888,29 @@ a.menu-item:hover { color: #86eeff; }
 }
 
 .biography-image-btn {
+  position: relative;
   display: block;
-  width: 100%;
-  padding: 0;
-  border: 0;
-  background: none;
-  cursor: zoom-in;
-}
-
-.biography-image {
   width: 100%;
   height: clamp(408px, 68vh, 680px);
   height: clamp(408px, 68svh, 680px);
-  aspect-ratio: 3 / 4;
+  padding: 0;
+  border: 0;
+  background: none;
+  overflow: hidden;
+  cursor: zoom-in;
+}
+
+/* 30% taller than the frame, so the scroll effect never reveals an edge. */
+.biography-image {
+  position: absolute;
+  left: 0;
+  top: -15%;
+  width: 100%;
+  height: 130%;
   object-fit: cover;
   display: block;
+  translate: 0 var(--parallax, 0px);
+  will-change: translate;
   transition: opacity 200ms ease;
 }
 
@@ -963,8 +979,7 @@ a.menu-item:hover { color: #86eeff; }
     max-width: 100%;
   }
 
-  .biography-image {
-    width: 100%;
+  .biography-image-btn {
     height: auto;
     aspect-ratio: 3 / 4;
   }
@@ -1384,7 +1399,6 @@ a.menu-item:hover { color: #86eeff; }
   transition: opacity 200ms ease;
 }
 
-.footer-watermark:hover .footer-watermark-img,
 .footer-watermark:focus-visible .footer-watermark-img {
   opacity: 0.12;
 }

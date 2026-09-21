@@ -82,11 +82,11 @@ export function Footer() {
                     Biography
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#contact" className="footer-link" onClick={handleNavClick('#contact')}>
                     Press Kit (EPK)
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
 

@@ -1,20 +1,55 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export function Biography() {
   const [open, setOpen] = useState(false);
+  const frame = useRef<HTMLButtonElement>(null);
+  const photo = useRef<HTMLImageElement>(null);
+
+  // Scroll effect: the photo drifts inside its frame as the page scrolls. It is
+  // centered when the frame is centered in the viewport, and it uses its full
+  // spare height over the frame's whole trip through the viewport, so an edge
+  // never shows and the motion never stalls.
+  useEffect(() => {
+    const box = frame.current!;
+    const image = photo.current!;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => {
+      if (motion.matches) {
+        image.style.setProperty('--parallax', '0px');
+        return;
+      }
+      const rect = box.getBoundingClientRect();
+      // -1 as the frame enters at the bottom, 0 when centered, 1 as it leaves at the top.
+      const travel = (innerHeight / 2 - (rect.top + rect.height / 2)) / (innerHeight / 2 + rect.height / 2);
+      // The photo is 30% taller than its frame, so it can drift 15% either way.
+      const drift = Math.max(-1, Math.min(1, travel)) * rect.height * .15;
+      image.style.setProperty('--parallax', `${drift}px`);
+    };
+    update();
+    addEventListener('scroll', update, { passive: true });
+    addEventListener('resize', update);
+    motion.addEventListener('change', update);
+    return () => {
+      removeEventListener('scroll', update);
+      removeEventListener('resize', update);
+      motion.removeEventListener('change', update);
+    };
+  }, []);
 
   return (
     <section className="biography-section" id="biography" aria-label="Biography">
       <div className="biography-container">
         <div className="biography-media">
           <button
+            ref={frame}
             type="button"
             className="biography-image-btn"
             onClick={() => setOpen(true)}
             aria-label="View photo of Paul Clasen performing on stage with POI"
           >
             <img
+              ref={photo}
               className="biography-image"
               src="/paulBand.jpg"
               alt="Paul Clasen performing on stage with POI"
