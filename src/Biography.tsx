@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { /* useEffect, */ useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 export function Biography() {
@@ -10,6 +10,7 @@ export function Biography() {
   // centered when the frame is centered in the viewport, and it uses its full
   // spare height over the frame's whole trip through the viewport, so an edge
   // never shows and the motion never stalls.
+  /*
   useEffect(() => {
     const box = frame.current!;
     const image = photo.current!;
@@ -36,6 +37,7 @@ export function Biography() {
       motion.removeEventListener('change', update);
     };
   }, []);
+  */
 
   return (
     <section className="biography-section" id="biography" aria-label="Biography">
