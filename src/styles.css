@@ -486,16 +486,19 @@ a.label { color: inherit; text-decoration: none; }
   .menu-button.is-open span:nth-child(3) {
     transform: translateY(calc(-1 * (var(--line-gap) + 3.3px))) rotate(-45deg);
   }
-  /* Keep the controls visible; reveal the glass only after scrolling. */
+  /* Same frosted pill as the scrolled bar. It fades in with the menu at the
+     top, and stays on once the page has been scrolled. */
   .compact-bar {
     width: 100%;
     min-width: 0;
-    background: rgb(255 255 255 / 0);
-    -webkit-backdrop-filter: blur(0px);
-    backdrop-filter: blur(0px);
-    box-shadow: 0 4px 20px #0000;
+    background: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+    transition: background 200ms ease, backdrop-filter 200ms ease, -webkit-backdrop-filter 200ms ease, box-shadow 200ms ease;
   }
-  .compact-nav.is-scrolled .compact-bar {
+  .compact-nav.is-scrolled .compact-bar,
+  .compact-nav.is-open .compact-bar {
     background: rgb(255 255 255 / .1);
     -webkit-backdrop-filter: blur(24px);
     backdrop-filter: blur(24px);
@@ -508,7 +511,7 @@ a.label { color: inherit; text-decoration: none; }
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .app-links, .compact-nav, .compact-nav.is-visible, .menu-panel, .menu-panel.is-open, .menu-button span, .app-link, .app-link img, .label, .menu-item, .gallery-modal, .gallery-image, .gallery-close, .gallery-arrow, .things-we-love-img, .biography-image, .contact-status-card { animation: none; transition: none; translate: 0 0; }
+  .app-links, .compact-nav, .compact-nav.is-visible, .compact-bar, .menu-panel, .menu-panel.is-open, .menu-button span, .app-link, .app-link img, .label, .menu-item, .gallery-modal, .gallery-image, .gallery-close, .gallery-arrow, .things-we-love-img, .biography-image, .contact-status-card { animation: none; transition: none; translate: 0 0; }
 }
 
 
@@ -1093,6 +1096,27 @@ a.label { color: inherit; text-decoration: none; }
   height: 100%;
   border: 0;
   display: block;
+}
+
+/* Painted at zero opacity so the players stay in the DOM without a visible frame. */
+.background-playback {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 300px;
+  height: 220px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.background-playback iframe {
+  border: 0;
+  pointer-events: none;
 }
 
 @media (max-width: 680px) {

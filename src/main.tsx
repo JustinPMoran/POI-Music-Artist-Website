@@ -9,6 +9,7 @@ import { Biography } from './Biography';
 import { MusicVideo } from './MusicVideo';
 import { Contact } from './Contact';
 import { Footer } from './Footer';
+import { BackgroundPlayback } from './BackgroundPlayback';
 import { scrollToSection } from './scroll';
 
 /** Wait for the actual assets so the entrance never reveals a partial scene. */
@@ -206,6 +207,7 @@ function App() {
 
   return (
     <main>
+      <BackgroundPlayback />
       <CompactNav ready={ready} />
       <section className={`hero${ready ? ' is-ready' : ''}`} id="hero" aria-label="POI music artist">
       <div className="stage" aria-hidden="true">
