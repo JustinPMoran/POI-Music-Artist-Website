@@ -12,17 +12,14 @@ import { Footer } from './Footer';
 import { BackgroundPlayback } from './BackgroundPlayback';
 import { scrollToSection } from './scroll';
 
-/** Wait for the actual assets so the entrance never reveals a partial scene. */
+/** Only the hero artwork needs to finish decoding before the loading card leaves. */
 function useSceneReady() {
   const [ready, setReady] = useState(false);
   useEffect(() => {
     let mounted = true;
-    const images = ['/poiHeader.png', '/poiLogo.webp'].map((src) => {
-      const image = new Image();
-      image.src = src;
-      return image.decode();
-    });
-    void Promise.allSettled([...images, document.fonts.ready]).then(() => {
+    const image = new Image();
+    image.src = '/poiHeader.webp';
+    void image.decode().catch(() => {}).then(() => {
       if (mounted) setReady(true);
     });
     return () => { mounted = false; };
@@ -122,7 +119,7 @@ function Performer() {
     };
   }, []);
 
-  return <img ref={image} className="performer" src="/poiHeader.png" alt="" aria-hidden="true" width="1212" height="1297" fetchPriority="high" />;
+  return <img ref={image} className="performer" src="/poiHeader.webp" alt="" aria-hidden="true" width="1212" height="1297" fetchPriority="high" />;
 }
 
 /** Text renders 20% smaller inside a hidden full-size copy, so each label keeps its original footprint. */
@@ -210,6 +207,11 @@ function App() {
       <BackgroundPlayback />
       <CompactNav ready={ready} />
       <section className={`hero${ready ? ' is-ready' : ''}`} id="hero" aria-label="POI music artist">
+      {!ready && <div className="hero-loading" role="status" aria-label="Loading POI">
+        <div className="hero-loading-mark"><img src="/poiLogo.webp" alt="" width="308" height="180" /></div>
+        <div className="hero-loading-rule"><span /></div>
+        <p>THE SHOW IS ABOUT TO BEGIN</p>
+      </div>}
       <div className="stage" aria-hidden="true">
         <div className="glow" />
         <Sunrays />

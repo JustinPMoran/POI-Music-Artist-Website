@@ -52,7 +52,7 @@ export function AllTheThingsWeLove() {
         src="/madEnoughFinalCover.png"
         alt=""
         aria-hidden="true"
-        loading="eager"
+        loading="lazy"
         decoding="async"
       />
       <div className="things-we-love-overlay" aria-hidden="true" />

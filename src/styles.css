@@ -21,6 +21,33 @@ body { overflow-x: clip; }
 /* Horizontal clipping is handled by body above. */
 main { position: relative; background: #000019; }
 .hero { position: relative; width: 100%; height: var(--hero-height); isolation: isolate; }
+.hero-loading {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  overflow: hidden;
+  background: radial-gradient(ellipse 70% 75% at 50% 0%, #12378a 0%, #070d38 47%, #000019 100%);
+  color: #fff;
+}
+.hero-loading::before {
+  content: '';
+  position: absolute;
+  inset: -30%;
+  background: conic-gradient(from 194deg at 50% -10%, transparent 0deg, #63c8ff22 9deg, transparent 17deg, transparent 30deg, #778dff16 38deg, transparent 45deg);
+  pointer-events: none;
+}
+.hero-loading-mark { position: relative; width: clamp(160px, 18vw, 270px); filter: drop-shadow(0 0 30px #77baff55); }
+.hero-loading-mark img { display: block; width: 100%; height: auto; }
+.hero-loading-rule { width: clamp(150px, 18vw, 280px); height: 2px; overflow: hidden; background: #ffffff25; }
+.hero-loading-rule span { display: block; width: 38%; height: 100%; background: #b3eaff; box-shadow: 0 0 18px #80d8ff; animation: loading-sweep 1.5s ease-in-out infinite alternate; }
+.hero-loading p { margin: 0; font: 500 clamp(10px, .75vw, 13px)/1.4 Arial, sans-serif; letter-spacing: .3em; color: #c2d4f0; }
+@keyframes loading-sweep { from { transform: translateX(-100%); } to { transform: translateX(265%); } }
+@media (prefers-reduced-motion: reduce) { .hero-loading-rule span { animation: none; width: 100%; } }
 /* All desktop measurements share the reference's 1920px coordinate system. */
 .stage { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: hidden; background: #000019; opacity: 0; }
 .glow { position: absolute; inset: 0; background: radial-gradient(ellipse 105% 42vw at 30% -10vw, #005cb2 0%, #003380 30%, #00005a 60%, transparent 100%); }
