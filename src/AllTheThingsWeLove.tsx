@@ -45,11 +45,11 @@ export function AllTheThingsWeLove() {
   }, []);
 
   return (
-    <section ref={bannerRef} className="things-we-love-banner" aria-label="All The Things We Love">
+    <section ref={bannerRef} className="things-we-love-banner" aria-label="Mad Enough">
       <img
         ref={imgRef}
         className="things-we-love-img"
-        src="/madEnoughCover.JPEG"
+        src="/madEnoughFinalCover.png"
         alt=""
         aria-hidden="true"
         loading="eager"
@@ -57,10 +57,10 @@ export function AllTheThingsWeLove() {
       />
       <div className="things-we-love-overlay" aria-hidden="true" />
       <div className="things-we-love-content">
-        <h2 className="things-we-love-title">ALL THE THINGS WE LOVE</h2>
+        <h2 className="things-we-love-title">MAD ENOUGH</h2>
         <a
           className="things-we-love-btn"
-          href="https://vyd.co/AllTheThingsWeLove"
+          href="https://vyd.co/MadEnough"
           target="_blank"
           rel="noopener noreferrer"
         >
