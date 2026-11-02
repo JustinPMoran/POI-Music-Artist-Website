@@ -64,24 +64,21 @@ export function Biography() {
         </div>
         <div className="biography-text">
           <p className="biography-paragraph">
-            Meet Paul Clasen from Boulder, Colorado-<br className="bio-break" />
-            the visionary behind POI. With a background<br className="bio-break" />
-            in classical percussion and marching arts,<br className="bio-break" />
-            POI blends marching snare drum grooves<br className="bio-break" />
-            and beautiful percussion, with the sound of<br className="bio-break" />
-            Pop and EDM, for a refreshing performance<br className="bio-break" />
-            of dance music.
+            Meet Paul Clasen from Boulder, Colorado- the visionary behind POI.
+            With a background in classical percussion and marching arts, POI
+            blends marching snare drum grooves and beautiful percussion, with
+            the sound of EDM and Dance-Pop, for a refreshing performance of dance
+            music. It’s about satisfying drum rhythms, EDM sonics, and human
+            sounding textures that fit seamlessly into productions with
+            choreographed dances and pop lyrics, that make for an exciting,
+            captivating, and brand new experience that's untapped.
           </p>
           <p className="biography-paragraph">
-            It's about satisfying drum rhythms, EDM<br className="bio-break" />
-            sonics, and human sounding textures that fit<br className="bio-break" />
-            seamlessly into productions with<br className="bio-break" />
-            choreographed dances and pop lyrics, that<br className="bio-break" />
-            make for an exciting, captivating, and brand<br className="bio-break" />
-            new experience that's untapped. POI is the<br className="bio-break" />
-            culmination of his creative talents and<br className="bio-break" />
-            journey, sonically exploring what defies<br className="bio-break" />
-            convention, inviting you into a world of new<br className="bio-break" />
+            Recently, POI’s work has made it into the top sync libraries such as
+            Crucial music and more, while also scoring a short film starring
+            Tanner Buchanan (Cobra Kai, Star Wars Visions, etc). POI is the
+            culmination of his creative talents and journey, sonically
+            exploring what defies convention, inviting you into a world of new
             and organic soundscapes.
           </p>
         </div>

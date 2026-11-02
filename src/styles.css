@@ -894,7 +894,7 @@ a.label { color: inherit; text-decoration: none; }
   display: block;
   width: 100%;
   height: clamp(408px, 68vh, 680px);
-  height: clamp(408px, 68svh, 680px);
+  height: calc(clamp(408px, 68svh, 680px) + 6px);
   padding: 0;
   border: 0;
   background: none;
@@ -932,19 +932,20 @@ a.label { color: inherit; text-decoration: none; }
   width: clamp(310px, 51.7vh, 517px);
   width: clamp(310px, 51.7svh, 517px);
   max-width: 517px;
+  position: relative;
+  top: -10px;
+  height: calc(clamp(408px, 68svh, 680px) + 26px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .biography-paragraph {
   margin: 0;
   color: #999;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  font-size: clamp(14.5px, 2.42vh, 24px);
-  font-size: clamp(14.5px, 2.42svh, 24px);
+  font-size: clamp(14px, 2.12svh, 21px);
   font-weight: 400;
-  line-height: clamp(22px, 3.67vh, 36.5px);
   line-height: clamp(22px, 3.67svh, 36.5px);
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
@@ -952,8 +953,7 @@ a.label { color: inherit; text-decoration: none; }
 }
 
 .biography-paragraph + .biography-paragraph {
-  margin-top: clamp(46px, 7.67vh, 7px); /*both of these were 77px, now 7px */
-  margin-top: clamp(46px, 7.67svh, 7px);
+  margin-top: clamp(7px, 7.67svh, 46px);
 }
 
 .bio-break {
@@ -990,6 +990,9 @@ a.label { color: inherit; text-decoration: none; }
     flex: none;
     width: 100%;
     max-width: 100%;
+    top: 0;
+    height: auto;
+    justify-content: flex-start;
   }
 
   .biography-paragraph {

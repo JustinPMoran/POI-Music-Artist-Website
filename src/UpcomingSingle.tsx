@@ -4,7 +4,7 @@ export function UpcomingSingle() {
       <div className="upcoming-container">
         <div className="upcoming-header">
           <span className="upcoming-line" aria-hidden="true" />
-          <h2 className="upcoming-title">UPCOMING SINGLE</h2>
+          <h2 className="upcoming-title">NEW RELEASE</h2>
           <span className="upcoming-line" aria-hidden="true" />
         </div>
         <div className="upcoming-content">
@@ -19,7 +19,7 @@ export function UpcomingSingle() {
             />
           </div>
           <div className="upcoming-desc">
-            <p className="upcoming-preview-text">A PREVIEW OF &quot;MAD ENOUGH&quot;</p>
+            <p className="upcoming-preview-text">&quot;MAD ENOUGH&quot; IS OUT NOW</p>
           </div>
         </div>
       </div>
