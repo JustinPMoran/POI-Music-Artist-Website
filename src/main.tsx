@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useRef, useState } from 'react';
+import { StrictMode, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import './styles.css';
 import { PhotoCarousel } from './PhotoCarousel';
@@ -11,21 +11,6 @@ import { Contact } from './Contact';
 import { Footer } from './Footer';
 import { BackgroundPlayback } from './BackgroundPlayback';
 import { scrollToSection } from './scroll';
-
-/** Only the hero artwork needs to finish decoding before the loading card leaves. */
-function useSceneReady() {
-  const [ready, setReady] = useState(false);
-  useEffect(() => {
-    let mounted = true;
-    const image = new Image();
-    image.src = '/poiHeader.webp';
-    void image.decode().catch(() => {}).then(() => {
-      if (mounted) setReady(true);
-    });
-    return () => { mounted = false; };
-  }, []);
-  return ready;
-}
 
 function Sunrays() {
   const container = useRef<HTMLDivElement>(null);
@@ -181,16 +166,14 @@ function ArtistHeader() {
 }
 
 function App() {
-  const ready = useSceneReady();
-
   useEffect(() => {
-    if (ready && window.location.hash) {
+    if (window.location.hash) {
       const timer = setTimeout(() => {
         scrollToSection(window.location.hash);
       }, 100);
       return () => clearTimeout(timer);
     }
-  }, [ready]);
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -205,13 +188,8 @@ function App() {
   return (
     <main>
       <BackgroundPlayback />
-      <CompactNav ready={ready} />
-      <section className={`hero${ready ? ' is-ready' : ''}`} id="hero" aria-label="POI music artist">
-      {!ready && <div className="hero-loading" role="status" aria-label="Loading POI">
-        <div className="hero-loading-mark"><img src="/poiLogo.webp" alt="" width="308" height="180" /></div>
-        <div className="hero-loading-rule"><span /></div>
-        <p>THE SHOW IS ABOUT TO BEGIN</p>
-      </div>}
+      <CompactNav ready />
+      <section className="hero is-ready" id="hero" aria-label="POI music artist">
       <div className="stage" aria-hidden="true">
         <div className="glow" />
         <Sunrays />

@@ -176,7 +176,7 @@ export function PhotoCarousel() {
                   }
                 }}
               >
-                <img src={photo.src} alt={copy === 1 ? photo.alt : ''} width="1200" height="1200" loading={copy === 1 && index < 2 ? 'eager' : 'lazy'} decoding="async" draggable={false} />
+                <img src={photo.src.replace('.webp', '-thumb.webp')} alt={copy === 1 ? photo.alt : ''} width="480" height="480" loading={copy === 1 && index < 2 ? 'eager' : 'lazy'} decoding="async" draggable={false} />
               </figure>
             ))}
           </div>
